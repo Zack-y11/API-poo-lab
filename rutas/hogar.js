@@ -70,4 +70,17 @@ ruta.put('/:id', getHogar, async(req, res) =>{
     }
 })
 
+ruta.delete('/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+        const respuesta = await Hogar.deleteOne({_id: id});
+        res.send(respuesta);
+        console.log("eliminated succesfully");
+    } catch (error) {
+        console.error("Error to eliminate: ", error);
+        res.status(500).send({error: 'Hubo un error al intentar eliminar el documento'});
+    }
+});
+
+
 module.exports = ruta;
